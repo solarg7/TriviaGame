@@ -31,23 +31,16 @@ window.onload = function() {
 	  $(".buttonStartClass").click(buttonStartFunction);
 
 	  function buttonStartFunction(){
-	  		$("#mainContainer").height(600);
+	  		$("#mainContainer").addClass("mainContainer2");
 	  		//setTimeout(getTotalizers, 1000*30)
 	  		quentionary();
 	  }
-
-	  
-
-
-
 
 	  function getTotalizers(){
 		    $("#bodyshop").append(container1);
 		    $("#mainContainer").append(mainTittle);
 		    $("#mainContainer").append("All Done");
-		    $("#mainContainer").append("Correct Answers: " + correctAnswer);
-	  		$("#mainContainer").append("Incorrect Answers: " + incorrectAnswer);
-	  		$("#mainContainer").append("Unanswered: " + unAnswer);
+
 	  }
 
 	  //buttonStart function. page lay-out
@@ -61,12 +54,72 @@ window.onload = function() {
 						$("#mainContainer").append(questions);
 
 						for(var q=0; q<5; q++){
-							var answerF = $("<a>");
-							answerF.text(stateCapital[i].answerChoices[q]);
+							var answerF = $("<input>");
+							answerF.addClass("answerClass");
+							answerF.attr("type", "radio")
+							answerF.attr("name", "city"+i)
+							answerF.attr("value", stateCapital[i].answerChoices[q]);
+							answerF.attr("id",stateCapital[i].answerChoices[q]);
+							answerF.attr("goodAnswerF", stateCapital[i].goodAnswer);
+
 							$("#mainContainer").append(answerF);
+
+							var answerT = $("<a>");
+							answerT.text(stateCapital[i].answerChoices[q]);
+
+							$("#mainContainer").append(answerT);
+							$("#mainContainer").append("<br>");							
 						}
+						$("#mainContainer").append("<hr>")
 				}
+
+			var buttonDone = $("<button>");
+			buttonDone.text("DONE");
+			buttonDone.addClass("buttonDoneClass");
+
+			//send info to HTML
+			$("#mainContainer").append(buttonDone);
+			$(".buttonDoneClass").click(buttonDoneFunction);
+
+		    function buttonDoneFunction(){
+		    	$("#mainContainer").html(mainTittle);
+		    	$("#mainContainer").append("<div>All Done</div>");
+		    	
+
+		    	var question1 = $("input[radio][name=city0]:checked").val("value");
+
+
+
+		    	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		    	$("#mainContainer").append("<div>Correct Answers: </div>" + question1);
+	  			$("#mainContainer").append("<div>Incorrect Answers: </div>");// + incorrectAnswer);
+	  			$("#mainContainer").append("<div>Unanswered: </div>");// + unAnswer);
+
+
+
+		  		//setTimeout(getTotalizers, 1000*30)
+		  
+		  	}
+
 	  }
+
+
 
 
 	  //$("#bodyshop").append(container2);
