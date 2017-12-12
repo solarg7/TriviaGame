@@ -2,7 +2,7 @@ window.onload = function() {
 	
 	$(document).ready(function() {
       
-      var stateCapital = [{nameState: "Florida", answerChoices: ["Miami", "Orlando", "Oviedo", "Talahasse", "Tampa"], goodAnswer: 3}, {nameState: "Texas", answerChoices: ["Miami", "Orlando", "Oviedo", "Talahasse", "Tampa"], goodAnswer: 1}, {nameState: "California", answerChoices: ["Los Angeles", "San Diego", "Sacramento", "San Jose", "San Francisco"], goodAnswer: 3}, {nameState: "Colorado", answerChoices: ["Miami", "Orlando", "Oviedo", "Talahasse", "Denver"], goodAnswer: 4}, {nameState: "Arizona", answerChoices: ["Phoneix", "Tucson", "Douglas", "Talahasse", "Tampa"], goodAnswer: 0}, {nameState: "Alabama", answerChoices: ["Tennesse", "Orlando", "Oviedo", "Talahasse", "Tampa"], goodAnswer: 2}];
+      var stateCapital = [{nameState: "Florida", answerChoices: ["Miami", "Orlando", "Oviedo", "Talahasse", "Tampa"], goodAnswer:"Orlando"}, {nameState: "Texas", answerChoices: ["Oregon", "Antofagasta", "Douglas", "NewYork", "Londres"], goodAnswer: "Antofagasta"}, {nameState: "California", answerChoices: ["Los Angeles", "San Diego", "Sacramento", "San Jose", "San Francisco"], goodAnswer: "San Diego"}, {nameState: "Colorado", answerChoices: ["Paris", "Roma", "Manchestre", "Quito", "Lima"], goodAnswer: "Paris"}, {nameState: "Arizona", answerChoices: ["Phoneix", "Tucson", "Douglas", "Talahasse", "Tampa"], goodAnswer: "Phoneix"}, {nameState: "Alabama", answerChoices: ["Tennesse", "Rio", "Fortazela", "Manaus", "La Rosita"], goodAnswer: "Fortazela"}];
 
       
 	  //start game
@@ -82,34 +82,49 @@ window.onload = function() {
 			$(".buttonDoneClass").click(buttonDoneFunction);
 
 		    function buttonDoneFunction(){
+		    	console.log("boton done1");
+		    	
+				var goodAnswerCounter = 0;
+				var incorrectAnswerCounter = 0;
+		    	for (var i = 0; i < 5; i++) {
+					
+		 	    	var variable = "input[name=city" + i + "]:checked";
+
+
+		 	    	var question1 = $(variable).val();
+
+		 	    	console.log(question1);
+
+			    	if (question1 == stateCapital[i].goodAnswer){
+			    		goodAnswerCounter = goodAnswerCounter + 1;
+			    	}
+
+			    	if (question1 != undefined && question1 != stateCapital[i].goodAnswer){
+			    		incorrectAnswerCounter = incorrectAnswerCounter + 1;
+			    	}
+
+
+
+
+
+				}
+
+				//var incorrectAnswerF = 
+
+
+				var noAnswer = 5 - goodAnswerCounter - incorrectAnswerCounter;
+
+
+
+
+
+
 		    	$("#mainContainer").html(mainTittle);
 		    	$("#mainContainer").append("<div>All Done</div>");
 		    	
-
-		    	var question1 = $("input[radio][name=city0]:checked").val("value");
-
-
-
-		    	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		    	$("#mainContainer").append("<div>Correct Answers: </div>" + question1);
-	  			$("#mainContainer").append("<div>Incorrect Answers: </div>");// + incorrectAnswer);
-	  			$("#mainContainer").append("<div>Unanswered: </div>");// + unAnswer);
+		    	$("#mainContainer").append("<div>Correct Answers: </div>" + goodAnswerCounter);
+	  			$("#mainContainer").append("<div>Incorrect Answers: </div>" + incorrectAnswerCounter);
+	  			$("#mainContainer").append("<div>Unanswered: </div>" + noAnswer);
 
 
 
