@@ -32,22 +32,33 @@ window.onload = function() {
 
 	  function buttonStartFunction(){
 	  		$("#mainContainer").addClass("mainContainer2");
-	  		//setTimeout(getTotalizers, 1000*30)
+	  		reloj()
 	  		quentionary();
 	  }
 
-	  function getTotalizers(){
-		    $("#bodyshop").append(container1);
-		    $("#mainContainer").append(mainTittle);
-		    $("#mainContainer").append("All Done");
 
+	  var intervalId;
+	  var secondMeter;
+
+	  var time = 30;
+
+	  function reloj(){
+	  		intervalId = setTimeout(buttonDoneFunction, 1000*30)
+	  		secondMeter = setTimeout(secondMeterCount, 1000*1)
 	  }
+
+
+
 
 	  //buttonStart function. page lay-out
 	  function quentionary(){
 	  		//var stateName = ("<a>")
 			//stateName.text = stateCapital.nameState[0];
 			$("#mainContainer").html(mainTittle);
+			var display = $("<div>");
+			display.text("00:00");
+			$("#mainContainer").append(display);
+
 				for (var i = 0; i < 5; i++) {
 						var questions = $("<div>");
 						questions.text("whas is the Capital of: " + stateCapital[i].nameState);
@@ -81,7 +92,13 @@ window.onload = function() {
 			$("#mainContainer").append(buttonDone);
 			$(".buttonDoneClass").click(buttonDoneFunction);
 
-		    function buttonDoneFunction(){
+		    
+
+	  }
+
+	  function buttonDoneFunction(){
+	  			clearInterval(intervalId);
+	  			clearInterval(secondMeter);
 		    	console.log("boton done1");
 		    	
 				var goodAnswerCounter = 0;
@@ -102,22 +119,10 @@ window.onload = function() {
 			    	if (question1 != undefined && question1 != stateCapital[i].goodAnswer){
 			    		incorrectAnswerCounter = incorrectAnswerCounter + 1;
 			    	}
-
-
-
-
-
 				}
 
 				//var incorrectAnswerF = 
-
-
 				var noAnswer = 5 - goodAnswerCounter - incorrectAnswerCounter;
-
-
-
-
-
 
 		    	$("#mainContainer").html(mainTittle);
 		    	$("#mainContainer").append("<div>All Done</div>");
@@ -125,19 +130,48 @@ window.onload = function() {
 		    	$("#mainContainer").append("<div>Correct Answers: </div>" + goodAnswerCounter);
 	  			$("#mainContainer").append("<div>Incorrect Answers: </div>" + incorrectAnswerCounter);
 	  			$("#mainContainer").append("<div>Unanswered: </div>" + noAnswer);
-
-
-
 		  		//setTimeout(getTotalizers, 1000*30)
-		  
-		  	}
 
 	  }
 
+	  function secondMeterCount() {
 
+	      // DONE: increment time by 1, remember we cant use "this" here.
+	      time--;
 
+	      // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+	      //       and save the result in a variable.
+	      var converted = timeConverter(time);
+	      console.log(converted);
 
+	      // DONE: Use the variable we just created to show the converted time in the "display" div.
+	      $("#display").text(converted);
+	  }  
+	      
+	  function timeConverter(t) {
+
+	      var minutes = Math.floor(t / 60);
+	      var seconds = t - (minutes * 60);
+
+	      if (seconds < 10) {
+	        seconds = "0" + seconds;
+	      }
+
+	      if (minutes === 0) {
+	        minutes = "00";
+	      }
+	      else if (minutes < 10) {
+	        minutes = "0" + minutes;
+	      }
+
+	      return minutes + ":" + seconds;
+	  }
+	 
+
+	  
 	  //$("#bodyshop").append(container2);
+
+
 
 	});
 	//document
