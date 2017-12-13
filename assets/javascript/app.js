@@ -32,7 +32,7 @@ window.onload = function() {
 
 	  function buttonStartFunction(){
 	  		$("#mainContainer").addClass("mainContainer2");
-	  		reloj()
+	  		reloj();
 	  		quentionary();
 	  }
 
@@ -43,10 +43,14 @@ window.onload = function() {
 	  var time = 30;
 
 	  function reloj(){
-	  		intervalId = setTimeout(buttonDoneFunction, 1000*30)
-	  		secondMeter = setTimeout(secondMeterCount, 1000*1)
+	  		intervalId = setTimeout(buttonDoneFunction, 1000*30);
+	  		counterSecond();
 	  }
 
+	  function counterSecond(){
+	  	secondMeter = setInterval(secondMeterCount, 1000*1);
+	  	console.log("holaaa")
+	  }
 
 
 
@@ -55,9 +59,10 @@ window.onload = function() {
 	  		//var stateName = ("<a>")
 			//stateName.text = stateCapital.nameState[0];
 			$("#mainContainer").html(mainTittle);
-			var display = $("<div>");
-			display.text("00:00");
-			$("#mainContainer").append(display);
+			var display1 = $("<div>");
+			display1.text("00:00");
+			display1.attr("id", "display")
+			$("#mainContainer").append(display1);
 
 				for (var i = 0; i < 5; i++) {
 						var questions = $("<div>");
@@ -136,8 +141,12 @@ window.onload = function() {
 
 	  function secondMeterCount() {
 
+	  	  console.log("holita")
+
 	      // DONE: increment time by 1, remember we cant use "this" here.
 	      time--;
+		  console.log(time);
+
 
 	      // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
 	      //       and save the result in a variable.
@@ -164,7 +173,8 @@ window.onload = function() {
 	        minutes = "0" + minutes;
 	      }
 
-	      return minutes + ":" + seconds;
+	      return  minutes + ":" + seconds;
+	      
 	  }
 	 
 
