@@ -159,6 +159,10 @@ window.onload = function() {
 		  		//setTimeout(getTotalizers, 1000*30)
 		  		$(".buttonStartClass").click(buttonStartFunction);
 
+
+		  		$(window).scrollTop(0);
+		  		
+
 	  }
 
 
