@@ -2,7 +2,7 @@ window.onload = function() {
 	
 	$(document).ready(function() {
       
-      var stateCapital = [{nameState: "Florida", answerChoices: ["Miami", "Orlando", "Oviedo", "Talahasse", "Tampa"], goodAnswer:"Orlando"}, {nameState: "Texas", answerChoices: ["Oregon", "Antofagasta", "Douglas", "NewYork", "Londres"], goodAnswer: "Antofagasta"}, {nameState: "California", answerChoices: ["Los Angeles", "San Diego", "Sacramento", "San Jose", "San Francisco"], goodAnswer: "San Diego"}, {nameState: "Colorado", answerChoices: ["Paris", "Roma", "Manchestre", "Quito", "Lima"], goodAnswer: "Paris"}, {nameState: "Arizona", answerChoices: ["Phoneix", "Tucson", "Douglas", "Talahasse", "Tampa"], goodAnswer: "Phoneix"}, {nameState: "Alabama", answerChoices: ["Tennesse", "Rio", "Fortazela", "Manaus", "La Rosita"], goodAnswer: "Fortazela"}];
+      var stateCapital = [{nameState: "Florida", answerChoices: ["Miami", "Orlando", "Oviedo", "Tallahassee", "Tampa"], goodAnswer:"Tallahassee"}, {nameState: "Texas", answerChoices: ["Dallas", "Houston", "San Antonio", "El Paso", "Austin"], goodAnswer: "Austin"}, {nameState: "California", answerChoices: ["Los Angeles", "San Diego", "Sacramento", "San Jose", "San Francisco"], goodAnswer: "Sacramento"}, {nameState: "Colorado", answerChoices: ["Aurora", "Aspen", "Durango", "Denver", "Fort Collins"], goodAnswer: "Denver"}, {nameState: "Arizona", answerChoices: ["Phoneix", "Tucson", "Douglas", "Yuma", "Tampa"], goodAnswer: "Phoneix"}, {nameState: "Alabama", answerChoices: ["Tennesse", "Rio", "Fortazela", "Manaus", "La Rosita"], goodAnswer: "Fortazela"}];
 
       
 	  //start game
@@ -14,7 +14,7 @@ window.onload = function() {
 
 	  //tittle initial page
 	  var mainTittle = $("<div>");
-	  mainTittle.text("SUPER TRIVIUM");
+	  mainTittle.text("SUPER TRIVIA");
 	  mainTittle.addClass("mainTittleClass");
 
 	  //startButton initial page
@@ -67,6 +67,7 @@ window.onload = function() {
 				for (var i = 0; i < 5; i++) {
 						var questions = $("<div>");
 						questions.text("whas is the Capital of: " + stateCapital[i].nameState);
+						questions.attr("id", "question");
 						$("#mainContainer").append(questions);
 
 						for(var q=0; q<5; q++){
@@ -82,6 +83,7 @@ window.onload = function() {
 
 							var answerT = $("<a>");
 							answerT.text(stateCapital[i].answerChoices[q]);
+							answerT.addClass("altern");
 
 							$("#mainContainer").append(answerT);
 							$("#mainContainer").append("<br>");							
@@ -102,10 +104,11 @@ window.onload = function() {
 	  }
 
 	  function buttonDoneFunction(){
+
 	  			clearInterval(intervalId);
 	  			clearInterval(secondMeter);
 		    	console.log("boton done1");
-		    	
+				//$("#mainContainer").addClass("mainContainer4");	    	
 				var goodAnswerCounter = 0;
 				var incorrectAnswerCounter = 0;
 		    	for (var i = 0; i < 5; i++) {
@@ -130,14 +133,35 @@ window.onload = function() {
 				var noAnswer = 5 - goodAnswerCounter - incorrectAnswerCounter;
 
 		    	$("#mainContainer").html(mainTittle);
-		    	$("#mainContainer").append("<div>All Done</div>");
+
+		    	var finalBanner = $("<div>");
+		    	finalBanner.attr("id", "finalBannerId")
+		    	finalBanner.append("<div>All Done</div>");
 		    	
-		    	$("#mainContainer").append("<div>Correct Answers: </div>" + goodAnswerCounter);
-	  			$("#mainContainer").append("<div>Incorrect Answers: </div>" + incorrectAnswerCounter);
-	  			$("#mainContainer").append("<div>Unanswered: </div>" + noAnswer);
+		    	finalBanner.append("<div>Correct Answers: </div>" + goodAnswerCounter);
+	  			finalBanner.append("<div>Incorrect Answers: </div>" + incorrectAnswerCounter);
+	  			finalBanner.append("<div>Unanswered: </div>" + noAnswer);
+	  			
+
+				$("#mainContainer").append(finalBanner);
+
+
+	  			var buttonStart = $("<button>");
+	  			buttonStart.text("START");
+	  			buttonStart.addClass("buttonStartClass");	  
+	  			var divEnd = $("<div>")
+	  			divEnd.append(buttonStart)
+
+	  			time = 30;
+
+	  			$("#mainContainer").append(divEnd);
+
 		  		//setTimeout(getTotalizers, 1000*30)
+		  		$(".buttonStartClass").click(buttonStartFunction);
 
 	  }
+
+
 
 	  function secondMeterCount() {
 
